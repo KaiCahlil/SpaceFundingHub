@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deep Tech Customer Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0b0d;
+      --surface: #111318;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8e6e1;
+      --muted: #6b6e7a;
+      --accent: #c8a96e;
+      --accent-dim: rgba(200, 169, 110, 0.12);
+      --mono: 'DM Mono', monospace;
+      --serif: 'Instrument Serif', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Subtle star/noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ambient glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -30vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80vw;
+      height: 60vh;
+      background: radial-gradient(ellipse, rgba(200,169,110,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,11,13,0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-mark {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    .hero-label::before {
+      content: '//';
+      margin-right: 0.5em;
+      opacity: 0.5;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: #a8a6a1;
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.35s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0b0d;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      display: inline-block;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+    /* ─── DIVIDER ─── */
+    .rule {
+      position: relative;
+      z-index: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .section-label span {
+      color: var(--accent);
+      margin-right: 0.6em;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 em { font-style: italic; color: var(--accent); }
+
+    /* ─── FOR WHO ─── */
+    .for-who p {
+      font-size: 1rem;
+      color: #a8a6a1;
+      max-width: 620px;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ─── PROBLEM GRID ─── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      margin-top: 2.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .problem-card {
+      background: var(--bg);
+      padding: 1.75rem;
+      transition: background 0.2s;
+    }
+    .problem-card:hover { background: var(--surface); }
+
+    .problem-card .icon {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .problem-card p {
+      font-size: 0.9rem;
+      color: #a8a6a1;
+      line-height: 1.6;
+    }
+
+    /* ─── SERVICES ─── */
+    .services-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .service-item {
+      background: var(--bg);
+      padding: 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      transition: background 0.2s;
+    }
+    .service-item:hover { background: var(--surface); }
+
+    .service-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+
+    .service-content h3 {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .service-content p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: #a8a6a1;
+      line-height: 1.8;
+      margin-bottom: 1.1rem;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .credential {
+      background: var(--bg);
+      padding: 1.1rem 1.25rem;
+    }
+
+    .credential-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .credential p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── PROCESS ─── */
+    .process-steps {
+      margin-top: 2.5rem;
+      counter-reset: steps;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      background: var(--border);
+    }
+
+    .process-step {
+      background: var(--bg);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 1.5rem;
+      counter-increment: steps;
+      position: relative;
+    }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--border);
+      border: 1px solid var(--border);
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .step-num::after { content: counter(steps, decimal-leading-zero); color: var(--muted); }
+
+    .process-step h3 {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .process-step p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(ellipse, rgba(200,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+
+    .contact-form input {
+      flex: 1;
+      background: var(--bg);
+      border: none;
+      outline: none;
+      padding: 0.9rem 1.25rem;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 300;
+    }
+
+    .contact-form input::placeholder { color: var(--muted); }
+
+    .contact-form button {
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      padding: 0.9rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #0a0b0d;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .contact-form button:hover { opacity: 0.85; }
+
+    .cta-note {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-top: 1rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .hero { padding: 7rem 1.25rem 4rem; }
+      section { padding: 3.5rem 1.25rem; }
+      .cta-section { padding: 2.5rem 1.25rem; }
+      .contact-form { flex-direction: column; border: none; gap: 0.75rem; }
+      .contact-form input { border: 1px solid var(--border); }
+      footer { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-mark">Deep Tech &amp; Consciousness-Tech Customer Dev</span>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">For deep tech founders</p>
+  <h1>Your technology is real.<br><em>Now make the right<br>customers see it.</em></h1>
+  <p class="hero-sub">
+    I help deep tech and consciousness-tech founders identify their most credible early customers and develop the narrative and outreach to get Letters of Intent in place — turning "interesting" into a signed commitment.
+  </p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Start the conversation</a>
+    <a href="#services" class="btn-ghost">See how it works</a>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<!-- FOR WHO -->
+<section class="for-who fade-in">
+  <p class="section-label"><span>01</span>Who this is for</p>
+  <h2>You're building something <em>genuinely hard.</em><br>The market doesn't know it yet.</h2>
+  <p>You're a deep tech or consciousness-tech founder — aerospace, robotics, advanced materials, climate, biotech, neurotechnology, human performance — with a technically credible solution and real potential customers who haven't signed anything yet.</p>
+  <p>You've heard "come back when you're further along" enough times to know that the problem isn't the technology. It's the gap between what you've built and what the right customers understand it to be worth.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <span class="icon">// symptom_01</span>
+      <p>Investor meetings end with interest but no check — because there's no customer validation to point to.</p>
+    </div>
+    <div class="problem-card">
+      <span class="icon">// symptom_02</span>
+      <p>Potential customers say "come back when you're further along" — a catch-22 that stalls progress on both fronts.</p>
+    </div>
+    <div class="problem-card">
+      <span class="icon">// symptom_03</span>
+      <p>You know who should care about this — but you can't figure out how to make them care <em>right now.</em></p>
+    </div>
+    <div class="problem-card">
+      <span class="icon">// symptom_04</span>
+      <p>Your technical roadmap is solid. Your market narrative is the part that isn't landing.</p>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- SERVICES -->
+<section id="services" class="fade-in">
+  <p class="section-label"><span>02</span>What we do together</p>
+  <h2>From technical innovation<br>to <em>signed LOI.</em></h2>
+
+  <div class="services-list">
+    <div class="service-item">
+      <span class="service-num">01</span>
+      <div class="service-content">
+        <h3>Customer Landscape Mapping</h3>
+        <p>Filter the noise and identify the 5–10 specific organizations most likely to become your first real customers — not the obvious names everyone pitches, but the credible early adopters with the right problem, budget, and incentive to act now.</p>
+      </div>
+    </div>
+    <div class="service-item">
+      <span class="service-num">02</span>
+      <div class="service-content">
+        <h3>Value Proposition Development</h3>
+        <p>Translate your technical solution into the specific value language each customer segment actually uses. What you've built and what they'll pay for aren't always the same sentence — we find where they overlap.</p>
+      </div>
+    </div>
+    <div class="service-item">
+      <span class="service-num">03</span>
+      <div class="service-content">
+        <h3>Value Chain Development</h3>
+        <p>Map how your innovation fits into — and reshapes — the broader value chain of your target market. Identify where you're an enabler, where you're a disruptor, and how to position that story for both customers and investors.</p>
+      </div>
+    </div>
+    <div class="service-item">
+      <span class="service-num">04</span>
+      <div class="service-content">
+        <h3>Customer Outreach & Narrative</h3>
+        <p>Develop the outreach messaging, email sequences, and one-page summaries that open conversations with the right people at target organizations — framed for their priorities, not yours.</p>
+      </div>
+    </div>
+    <div class="service-item">
+      <span class="service-num">05</span>
+      <div class="service-content">
+        <h3>LOI Strategy & Artifact Creation</h3>
+        <p>Structure the customer relationship to move toward a Letter of Intent — and deliver the actual artifacts to get there: LOI drafts, outreach email templates, lightweight CRM frameworks, and short authority pieces that translate your innovation into a narrative your customer can champion internally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ABOUT -->
+<section class="fade-in">
+  <p class="section-label"><span>03</span>Why me</p>
+  <h2>I'm not a consultant<br>who studied this. <em>I live it.</em></h2>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a deep tech founder. I invented a novel object-capture technology for in-space applications and have spent years navigating the exact gap you're in — technically credible, pre-revenue, trying to convert interest into commitment.</p>
+      <p>I've iterated my own pitch through <strong>40+ versions</strong>, presented at the Space Resources Investment Summit, written a full NASA SBIR proposal, and had more "come back when you're further along" conversations than I can count.</p>
+      <p>What I've learned — expensively — is how to filter real customers from noise, how to translate a gnarly technical concept into a value proposition that lands, and how to structure early customer relationships toward something signable.</p>
+      <p>I can't promise you I've solved every problem. I can promise you I understand it from the inside.</p>
+    </div>
+
+    <div class="credentials">
+      <div class="credential">
+        <p class="credential-label">Background</p>
+        <p>Deep tech founder, space-tech venture, novel in-space object-capture technology</p>
+      </div>
+      <div class="credential">
+        <p class="credential-label">Technical Range</p>
+        <p>Self-taught across systems engineering, TRL frameworks, satellite design, and go-to-market strategy</p>
+      </div>
+      <div class="credential">
+        <p class="credential-label">Pitch Experience</p>
+        <p>Space Resources Investment Summit presenter; 40+ pitch iterations; multiple investor meeting cycles</p>
+      </div>
+      <div class="credential">
+        <p class="credential-label">Proposal Writing</p>
+        <p>Full NASA SBIR Phase I proposal authored, including cost breakdown, work plan, and TRL milestone structure</p>
+      </div>
+      <div class="credential">
+        <p class="credential-label">Domain Focus</p>
+        <p>Deep tech and consciousness-tech broadly — aerospace, defense tech, advanced materials, robotics, climate tech, neurotechnology, human performance</p>
+      </div>
+      <div class="credential">
+        <p class="credential-label">Value Chain Work</p>
+        <p>Experience mapping how technical innovations fit into and reshape broader market value chains — identifying enabler and disruptor positioning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PROCESS -->
+<section class="fade-in">
+  <p class="section-label"><span>04</span>How it works</p>
+  <h2>A focused engagement,<br>not an <em>open-ended retainer.</em></h2>
+
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num"></div>
+      <div>
+        <h3>Intake conversation (free)</h3>
+        <p>A 30-minute call to understand your technology, your current customer situation, and whether this is a good fit. No pitch, no pressure.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num"></div>
+      <div>
+        <h3>Customer landscape audit</h3>
+        <p>I map your potential customer universe, filter for the highest-probability early adopters, and deliver a prioritized target list with reasoning.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num"></div>
+      <div>
+        <h3>Narrative and outreach development</h3>
+        <p>We develop the value proposition for each customer segment and build the outreach materials — emails, one-pagers, conversation frameworks.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num"></div>
+      <div>
+        <h3>LOI path strategy</h3>
+        <p>I help you structure the customer relationship and conversations to move toward a signed LOI — and advise on how to use it once you have it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CTA -->
+<section id="contact" class="fade-in">
+  <div class="cta-section">
+    <p class="section-label" style="justify-content:center;display:flex;"><span>05</span>Get started</p>
+    <h2>Let's find your<br><em>first real customer.</em></h2>
+    <p>Fill out the quick intake form and I'll reach out to schedule a free 30-minute call.</p>
+
+    <a href="https://forms.gle/8b46KMSkqSAxgZPv5" target="_blank" class="btn-primary" style="display:inline-block; text-decoration:none;">Fill out the intake form</a>
+    <p class="cta-note">// no pitch deck required &nbsp;·&nbsp; no commitment &nbsp;·&nbsp; 30 min call</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>// Deep Tech &amp; Consciousness-Tech Customer Development</p>
+  <p>Built for founders in the gap.</p>
+</footer>
+
+<script>
+  // Scroll-triggered fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Contact form handler (placeholder)
+  document.querySelector('.contact-form button').addEventListener('click', () => {
+    const input = document.querySelector('.contact-form input');
+    if (input.value && input.value.includes('@')) {
+      input.value = '';
+      input.placeholder = 'Got it — I\'ll be in touch soon.';
+    } else {
+      input.style.outline = '1px solid var(--accent)';
+      input.placeholder = 'Enter a valid email';
+      setTimeout(() => {
+        input.style.outline = '';
+        input.placeholder = 'your@email.com';
+      }, 2000);
+    }
+  });
+</script>
+</body>
+</html>
