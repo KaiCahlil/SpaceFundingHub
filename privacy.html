@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — SpaceFundingHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Syne:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f3ef;
+      --surface: #eceae4;
+      --dark: #0d1117;
+      --text: #1a1c21;
+      --muted: #7a7d88;
+      --border: rgba(26,28,33,0.1);
+      --accent: #1a3de4;
+      --accent-light: rgba(26,61,228,0.08);
+      --syne: 'Syne', sans-serif;
+      --serif: 'Crimson Pro', serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,28,33,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,28,33,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(244,243,239,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 28px; height: 28px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-mark::after {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .logo-text {
+      font-family: var(--syne);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text span { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 8rem 2.5rem 6rem;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+
+    .last-updated {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-body h2 {
+      font-family: var(--syne);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--text);
+    }
+
+    .policy-body p {
+      font-size: 1rem;
+      color: #4a4d58;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .policy-body ul {
+      margin: 0.5rem 0 1rem 1.25rem;
+    }
+
+    .policy-body ul li {
+      font-size: 1rem;
+      color: #4a4d58;
+      line-height: 1.8;
+      margin-bottom: 0.35rem;
+    }
+
+    .policy-body a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-light);
+      transition: border-color 0.2s;
+    }
+    .policy-body a:hover { border-color: var(--accent); }
+
+    .policy-body .contact-block {
+      margin-top: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .policy-nav {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .policy-nav a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .policy-nav a:hover { color: var(--accent); }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p, footer a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="logo-mark"></div>
+    <span class="logo-text">Space<span>Funding</span>Hub</span>
+  </a>
+  <div class="nav-right">
+    <a href="/#categories" class="nav-link">What's inside</a>
+    <a href="/#pricing" class="nav-link">Pricing</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <p class="page-eyebrow">Legal</p>
+  <h1>Privacy Policy</h1>
+  <p class="last-updated">Last updated: March 2026</p>
+
+  <div class="policy-body">
+
+    <h2>1. Overview</h2>
+    <p>SpaceFundingHub takes your privacy seriously. This policy explains what personal data we collect, how we use it, and your rights regarding that data. We collect the minimum information necessary to deliver the Service and do not sell your data to third parties.</p>
+
+    <h2>2. Information We Collect</h2>
+    <p>We collect the following information when you subscribe or interact with SpaceFundingHub:</p>
+    <ul>
+      <li><strong>Email address</strong> — required for account creation, subscription management, and delivery of your database access link</li>
+      <li><strong>Payment information</strong> — handled entirely by Lemon Squeezy, our payment processor. We do not store or process your card details directly</li>
+      <li><strong>Name</strong> — collected by Lemon Squeezy at checkout, used for billing records</li>
+      <li><strong>Usage data</strong> — Airtable may log access to shared views (e.g. IP address, browser type) per their own privacy policy</li>
+    </ul>
+    <p>We do not use tracking pixels, behavioral advertising tools, or third-party analytics beyond what is described here.</p>
+
+    <h2>3. How We Use Your Information</h2>
+    <p>We use your information solely for the following purposes:</p>
+    <ul>
+      <li>Delivering your database access link after purchase</li>
+      <li>Sending subscription-related communications (receipts, renewal notices, access updates)</li>
+      <li>Sending the SpaceFundingHub weekly digest of new and changed opportunities (subscribers only — you may opt out at any time)</li>
+      <li>Responding to support requests you initiate</li>
+      <li>Complying with legal obligations</li>
+    </ul>
+    <p>We do not use your email for marketing unrelated to SpaceFundingHub, and we do not share it with advertisers or data brokers.</p>
+
+    <h2>4. Third-Party Services</h2>
+    <p>SpaceFundingHub uses the following third-party services to operate:</p>
+    <ul>
+      <li><strong>Lemon Squeezy</strong> — payment processing and subscription management. Their privacy policy is available at <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener">lemonsqueezy.com/privacy</a></li>
+      <li><strong>Airtable</strong> — database hosting and shared view delivery. Their privacy policy is available at <a href="https://www.airtable.com/privacy" target="_blank" rel="noopener">airtable.com/privacy</a></li>
+      <li><strong>GitHub Pages</strong> — website hosting. Their privacy statement is available at <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">docs.github.com</a></li>
+    </ul>
+    <p>Each of these services processes data under their own privacy policies. We encourage you to review them.</p>
+
+    <h2>5. Data Retention</h2>
+    <p>We retain your email address and subscription records for as long as your subscription is active and for a reasonable period after cancellation for legal and accounting purposes. You may request deletion of your data at any time by emailing us — see contact details below.</p>
+
+    <h2>6. Your Rights</h2>
+    <p>You have the right to access the personal data we hold about you, request correction of inaccurate data, request deletion of your data, and opt out of non-transactional email communications at any time. To exercise any of these rights, contact us at the address below.</p>
+
+    <h2>7. Cookies</h2>
+    <p>The SpaceFundingHub landing page (spacefundinghub.com) does not use cookies or tracking scripts directly. Third-party services we use (Lemon Squeezy, Airtable) may set their own cookies when you interact with their platforms.</p>
+
+    <h2>8. Children's Privacy</h2>
+    <p>SpaceFundingHub is not directed at children under the age of 13. We do not knowingly collect personal information from children.</p>
+
+    <h2>9. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Material changes will be communicated to subscribers by email. Continued use of the Service after changes take effect constitutes acceptance of the revised policy.</p>
+
+    <div class="contact-block">
+      Privacy questions or data requests?<br>
+      Contact us at: <a href="mailto:hello@spacefundinghub.com">hello@spacefundinghub.com</a>
+    </div>
+
+    <div class="policy-nav">
+      <a href="/terms.html">Terms of Service →</a>
+      <a href="/refunds.html">Refund Policy →</a>
+      <a href="/">← Back to SpaceFundingHub</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 SpaceFundingHub</p>
+  <div class="footer-links">
+    <a href="/terms.html">Terms of Service</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/refunds.html">Refund Policy</a>
+  </div>
+</footer>
+
+</body>
+</html>

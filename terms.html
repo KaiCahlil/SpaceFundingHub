@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — SpaceFundingHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Syne:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f3ef;
+      --surface: #eceae4;
+      --dark: #0d1117;
+      --text: #1a1c21;
+      --muted: #7a7d88;
+      --border: rgba(26,28,33,0.1);
+      --accent: #1a3de4;
+      --accent-light: rgba(26,61,228,0.08);
+      --syne: 'Syne', sans-serif;
+      --serif: 'Crimson Pro', serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,28,33,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,28,33,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(244,243,239,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 28px; height: 28px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-mark::after {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .logo-text {
+      font-family: var(--syne);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text span { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+
+    /* PAGE */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 8rem 2.5rem 6rem;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+
+    .last-updated {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-body h2 {
+      font-family: var(--syne);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--text);
+    }
+
+    .policy-body p {
+      font-size: 1rem;
+      color: #4a4d58;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .policy-body ul {
+      margin: 0.5rem 0 1rem 1.25rem;
+    }
+
+    .policy-body ul li {
+      font-size: 1rem;
+      color: #4a4d58;
+      line-height: 1.8;
+      margin-bottom: 0.35rem;
+    }
+
+    .policy-body a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-light);
+      transition: border-color 0.2s;
+    }
+    .policy-body a:hover { border-color: var(--accent); }
+
+    .policy-body .contact-block {
+      margin-top: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .policy-nav {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .policy-nav a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .policy-nav a:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p, footer a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="logo-mark"></div>
+    <span class="logo-text">Space<span>Funding</span>Hub</span>
+  </a>
+  <div class="nav-right">
+    <a href="/#categories" class="nav-link">What's inside</a>
+    <a href="/#pricing" class="nav-link">Pricing</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <p class="page-eyebrow">Legal</p>
+  <h1>Terms of Service</h1>
+  <p class="last-updated">Last updated: March 2026</p>
+
+  <div class="policy-body">
+
+    <h2>1. Agreement to Terms</h2>
+    <p>By accessing or using SpaceFundingHub ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the Service. SpaceFundingHub is operated as a sole proprietorship. References to "we," "us," or "our" refer to SpaceFundingHub and its operator.</p>
+
+    <h2>2. Description of Service</h2>
+    <p>SpaceFundingHub is a subscription-based database of funding opportunities for space industry founders and startups. The Service provides access to a curated, regularly updated Airtable database covering eight categories: investor directory, SBIR/STTR tracker, accelerators and fellowships, prize competitions, non-SBIR grants, corporate programs, industry events, and coalitions and groups.</p>
+    <p>Access is delivered via a private shared Airtable view link sent to your registered email address upon successful payment. A free tier providing access to the Industry Events and Coalitions & Groups categories is available without a paid subscription.</p>
+
+    <h2>3. Subscriptions and Billing</h2>
+    <p>SpaceFundingHub offers two paid subscription plans:</p>
+    <ul>
+      <li>Monthly: $12.00 USD per month, billed monthly</li>
+      <li>Annual: $99.00 USD per year, billed annually</li>
+    </ul>
+    <p>Subscriptions are billed in advance and automatically renew at the end of each billing period unless cancelled. You may cancel your subscription at any time through your Lemon Squeezy customer portal. Cancellation takes effect at the end of the current billing period — you retain access until that date. We do not offer prorated refunds for unused time within a billing period except as described in our Refund Policy.</p>
+
+    <h2>4. Account and Access</h2>
+    <p>Your subscription grants you a single-user, non-transferable license to access the database for your personal or internal business use. You may not share your Airtable access link with others, resell access, or use the Service to build a competing product. We reserve the right to terminate access if these terms are violated.</p>
+
+    <h2>5. Accuracy of Information</h2>
+    <p>We make reasonable efforts to keep listings current and accurate. However, the funding landscape changes rapidly. SpaceFundingHub does not guarantee the accuracy, completeness, or timeliness of any listing. Status indicators reflect our best available information at the time of last verification. Always verify directly with the funding source before investing time in an application. We are not responsible for decisions made based on information in the database.</p>
+
+    <h2>6. Intellectual Property</h2>
+    <p>The database, its curation, structure, descriptions, and status notes are the intellectual property of SpaceFundingHub. You may not reproduce, distribute, scrape, or republish the contents of the database in any form without written permission. Underlying information about publicly available funding programs (names, URLs, award amounts from public sources) is factual and not claimed as proprietary.</p>
+
+    <h2>7. Disclaimer of Warranties</h2>
+    <p>The Service is provided "as is" without warranties of any kind, either express or implied. We do not warrant that the Service will be uninterrupted, error-free, or that any particular funding opportunity will be available, accurate, or suitable for your needs.</p>
+
+    <h2>8. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, SpaceFundingHub shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the Service, even if we have been advised of the possibility of such damages. Our total liability to you for any claim arising from these terms or the Service shall not exceed the amount you paid for the Service in the three months preceding the claim.</p>
+
+    <h2>9. Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. We will notify subscribers of material changes by email. Continued use of the Service after changes take effect constitutes acceptance of the revised Terms.</p>
+
+    <h2>10. Governing Law</h2>
+    <p>These Terms are governed by the laws of the United States. Any disputes shall be resolved in the jurisdiction where SpaceFundingHub is operated.</p>
+
+    <div class="contact-block">
+      Questions about these Terms?<br>
+      Contact us at: <a href="mailto:hello@spacefundinghub.com">hello@spacefundinghub.com</a>
+    </div>
+
+    <div class="policy-nav">
+      <a href="/privacy.html">Privacy Policy →</a>
+      <a href="/refunds.html">Refund Policy →</a>
+      <a href="/">← Back to SpaceFundingHub</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 SpaceFundingHub</p>
+  <div class="footer-links">
+    <a href="/terms.html">Terms of Service</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/refunds.html">Refund Policy</a>
+  </div>
+</footer>
+
+</body>
+</html>

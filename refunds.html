@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refund Policy — SpaceFundingHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Syne:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f3ef;
+      --surface: #eceae4;
+      --dark: #0d1117;
+      --text: #1a1c21;
+      --muted: #7a7d88;
+      --border: rgba(26,28,33,0.1);
+      --accent: #1a3de4;
+      --accent-light: rgba(26,61,228,0.08);
+      --green: #00875a;
+      --green-bg: rgba(0,135,90,0.08);
+      --syne: 'Syne', sans-serif;
+      --serif: 'Crimson Pro', serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,28,33,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,28,33,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(244,243,239,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 28px; height: 28px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-mark::after {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .logo-text {
+      font-family: var(--syne);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text span { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 8rem 2.5rem 6rem;
+    }
+
+    .page-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+
+    .last-updated {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tldr-box {
+      background: var(--dark);
+      padding: 2rem 2.25rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .tldr-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .tldr-box p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .policy-body h2 {
+      font-family: var(--syne);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--text);
+    }
+
+    .policy-body p {
+      font-size: 1rem;
+      color: #4a4d58;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .policy-body ul {
+      margin: 0.5rem 0 1rem 1.25rem;
+    }
+
+    .policy-body ul li {
+      font-size: 1rem;
+      color: #4a4d58;
+      line-height: 1.8;
+      margin-bottom: 0.35rem;
+    }
+
+    .policy-body a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-light);
+      transition: border-color 0.2s;
+    }
+    .policy-body a:hover { border-color: var(--accent); }
+
+    .guarantee-block {
+      margin: 2.5rem 0;
+      border: 1px solid rgba(0,135,90,0.25);
+      background: var(--green-bg);
+      padding: 1.5rem 2rem;
+    }
+
+    .guarantee-block .guarantee-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .guarantee-block p {
+      font-size: 1rem;
+      color: #2a4a3a;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .policy-body .contact-block {
+      margin-top: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .policy-nav {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .policy-nav a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .policy-nav a:hover { color: var(--accent); }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p, footer a {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="logo-mark"></div>
+    <span class="logo-text">Space<span>Funding</span>Hub</span>
+  </a>
+  <div class="nav-right">
+    <a href="/#categories" class="nav-link">What's inside</a>
+    <a href="/#pricing" class="nav-link">Pricing</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <p class="page-eyebrow">Legal</p>
+  <h1>Refund Policy</h1>
+  <p class="last-updated">Last updated: March 2026</p>
+
+  <div class="tldr-box">
+    <span class="tldr-label">// tl;dr</span>
+    <p>All sales are final. No refunds are issued. You can cancel anytime and keep full access through the end of your billing period.</p>
+  </div>
+
+  <div class="policy-body">
+
+    <h2>No Refunds</h2>
+    <p>All SpaceFundingHub subscription purchases are final and non-refundable. By completing your purchase, you acknowledge and agree that no refunds will be issued for any reason, including but not limited to partial use of a billing period, dissatisfaction with the content, or change of circumstances.</p>
+
+    <h2>Cancellation</h2>
+    <p>You may cancel your subscription at any time through your Lemon Squeezy customer portal (link provided in your purchase confirmation email). Cancellation stops future billing immediately. You retain full access to SpaceFundingHub through the end of your current paid billing period — monthly or annual — at which point your access will not renew.</p>
+
+    <h2>Billing Errors</h2>
+    <p>If you were charged in error — for example due to a duplicate transaction or a system error — please contact us promptly and we will investigate and correct the issue.</p>
+
+    <h2>Questions</h2>
+    <p>If you have questions about your subscription or billing, reach out before purchasing and we are happy to help.</p>
+
+    <div class="contact-block">
+      Billing questions?<br>
+      Email: hello@spacefundinghub.com
+    </div>
+
+    <div class="policy-nav">
+      <a href="/terms.html">Terms of Service &rarr;</a>
+      <a href="/privacy.html">Privacy Policy &rarr;</a>
+      <a href="/">&larr; Back to SpaceFundingHub</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 SpaceFundingHub</p>
+  <div class="footer-links">
+    <a href="/terms.html">Terms of Service</a>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/refunds.html">Refund Policy</a>
+  </div>
+</footer>
+
+</body>
+</html>
